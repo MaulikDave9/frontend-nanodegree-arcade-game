@@ -1,5 +1,7 @@
-# Maulik Dave
-# Project 3
+## How to Run:
+
+## How to Play:
+
 
 frontend-nanodegree-arcade-game
 ===============================
