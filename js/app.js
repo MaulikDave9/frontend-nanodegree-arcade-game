@@ -1,5 +1,5 @@
 // Enemies our player must avoid
-var Enemy = function() {
+var Enemy = function(x,y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -7,6 +7,8 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+    this.x = x;
+    this.y = y;
 };
 
 // Update the enemy's position, required method for game
@@ -23,8 +25,10 @@ Enemy.prototype.render = function() {
 };
 
 // Player whose goal is to reach the water and avoid enemies.
-var Player = function() {
+var Player = function(x,y) {
     this.sprite = 'images/char-boy.png';   
+    this.x = x;
+    this.y = y;
 };
 
 Player.prototype.update = function(dt) {
@@ -41,11 +45,16 @@ Player.prototype.handleInput = function() {
 };
 
 
-// Now instantiate your objects.
+// Instantiating Enemies and Player Objects.
 // Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+var enemy1 = new Enemy(0,60);
+var enemy2 = new Enemy(0,145);
+var enemy3 = new Enemy(0,230);
 var allEnemies = [];
-var player = new Player();
+allEnemies.push(enemy1,enemy2, enemy3);
+
+// Place the player object in a variable called player
+var player = new Player(200,400);
 
 
 // This listens for key presses and sends the keys to your
