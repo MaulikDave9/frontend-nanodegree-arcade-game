@@ -47,25 +47,21 @@ Player.prototype.handleInput = function(move) {
 
     var inc = 10;
 
-    if (move == 'left')
-        if ((this.x - inc) > left_min)
-            this.x -= inc;
-    if (move == 'up')
-        if ((this.y - inc) > up_min)
-            this.y -= inc;
-    if (move == 'right')
-        if ((this.x + inc) < left_max)
-            this.x += inc;
-    if (move == 'down')
-        if ((this.y + inc) < up_max)
-            this.y += inc;
+    if ((move == 'left') && (this.x-inc > left_min))
+        this.x -= inc;
+    if ((move == 'up')   && (this.y-inc > up_min))
+        this.y -= inc;
+    if ((move == 'right') && (this.x+inc < right_max))
+        this.x += inc;
+    if ((move == 'down')  && (this.y+inc < down_max))
+        this.y += inc;
 
 };
 
-var up_max   = 606;
-var up_min   = 0; // How to get canvas.width value from the engine.js.
-var left_min = 0;
-var left_max = 505;
+var down_max   = 606;
+var up_min     = 0; // How to get canvas.width value from the engine.js.
+var left_min   = 0;
+var right_max  = 505;
 
 // Instantiating Enemies Objects.
 var enemy1 = new Enemy(0,60, 100*Math.random() );
