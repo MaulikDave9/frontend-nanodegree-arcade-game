@@ -1,25 +1,26 @@
+
 // Enemies our player must avoid
-var Enemy = function(x,y) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+var Enemy = function(x,y, speed) {
+    // Applied to each of enemy instances 
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
+    this.speed = speed;
+
+    //Object.create(Enemy.prototype);
 };
 
-// Update the enemy's position, required method for game
+// Update the enemy's position
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
+    // Multiply any movement by the dt parameter
+    // to ensure the game runs at the same speed for all computers.
+    this.x += this.speed * dt
+    if (this.x > 505)
+        this.x = 0;
 };
 
-// Draw the enemy on the screen, required method for game
+// Draw the enemy on the screen
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
@@ -29,6 +30,8 @@ var Player = function(x,y) {
     this.sprite = 'images/char-boy.png';   
     this.x = x;
     this.y = y;
+
+    this.win = 0;
 };
 
 Player.prototype.update = function(dt) {
@@ -40,25 +43,44 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Player.prototype.handleInput = function() {
+Player.prototype.handleInput = function(move) {
+
+    var inc = 10;
+
+    if (move == 'left')
+        if ((this.x - inc) > left_min)
+            this.x -= inc;
+    if (move == 'up')
+        if ((this.y - inc) > up_min)
+            this.y -= inc;
+    if (move == 'right')
+        if ((this.x + inc) < left_max)
+            this.x += inc;
+    if (move == 'down')
+        if ((this.y + inc) < up_max)
+            this.y += inc;
 
 };
 
+var up_max   = 606;
+var up_min   = 0; // How to get canvas.width value from the engine.js.
+var left_min = 0;
+var left_max = 505;
 
-// Instantiating Enemies and Player Objects.
-// Place all enemy objects in an array called allEnemies
-var enemy1 = new Enemy(0,60);
-var enemy2 = new Enemy(0,145);
-var enemy3 = new Enemy(0,230);
+// Instantiating Enemies Objects.
+var enemy1 = new Enemy(0,60, 100*Math.random() );
+var enemy2 = new Enemy(0,145, 100*Math.random());
+var enemy3 = new Enemy(0,230, 100*Math.random());
+
+// All enemy objects in an array allEnemies
 var allEnemies = [];
 allEnemies.push(enemy1,enemy2, enemy3);
 
 // Place the player object in a variable called player
 var player = new Player(200,400);
 
-
 // This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// Player.handleInput() method. 
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',

@@ -119,7 +119,7 @@ var Engine = (function(global) {
             numCols = 5,
             row, col;
 
-        /* Loop through the number of rows and columns we've defined above
+        /* Loop through the number of rows and columns defined above
          * and, using the rowImages array, draw the correct image for that
          * portion of the "grid"
          */
@@ -162,7 +162,7 @@ var Engine = (function(global) {
         // noop
     }
 
-    /* Go ahead and load all of the images we know we're going to need to
+    /* Load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when
      * all of these images are properly loaded our game will start.
      */
