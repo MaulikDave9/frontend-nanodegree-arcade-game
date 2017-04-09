@@ -38,33 +38,43 @@ Player.prototype.update = function(dt) {
    
 };
 
+
 // Draw the player on the screen
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+// Player movement: up, down, left, right 
 Player.prototype.handleInput = function(move) {
 
     var inc = 10;
 
     if ((move == 'left')       && (this.x-inc > 0))
         this.x -= inc;
-    else if ((move == 'up')    && (this.y-inc > 0))  // win ???
+    else if ((move == 'up')    && (this.y-inc > 0))  
         this.y -= inc;
     else if ((move == 'right') && (this.x+inc < 400))
         this.x += inc;
     else if ((move == 'down')  && (this.y+inc < 410))
         this.y += inc;
 
+    if (this.y == 10) {
+        this.win = 1;
+        alert("Congratulations - you reached the water and won this round!")
+    }    
+
 };
 
+
+// TODO:  How to put this in a function ?? OOP??
+
 // Instantiating Enemies Objects (by looking at console this co-ordinates were determined)
-var enemy1  = new Enemy(0,60,  100*Math.random() );
+var enemy1  = new Enemy(0,60,  100*Math.random());
 var enemy2  = new Enemy(0,145, 100*Math.random());
 var enemy3  = new Enemy(0,230, 100*Math.random());
-var enemy11 = new Enemy(0,60,  100*Math.random() );
-var enemy22 = new Enemy(0,145, 100*Math.random());
-var enemy33 = new Enemy(0,230, 100*Math.random());
+var enemy11 = new Enemy(0,60,  50*Math.random());
+var enemy22 = new Enemy(0,145, 50*Math.random());
+var enemy33 = new Enemy(0,230, 50*Math.random());
 
 // All enemy objects in an array allEnemies
 var allEnemies = [];
@@ -72,6 +82,7 @@ allEnemies.push(enemy1,enemy2, enemy3,enemy11,enemy22, enemy33);
 
 // Place the player object in a variable called player
 var player = new Player(200, 400);
+
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. 

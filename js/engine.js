@@ -80,7 +80,6 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
     }
 
     /* This is called by the update function and loops through all of the
@@ -95,7 +94,24 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
         player.update();
+        checkcollision();
     }
+
+    function checkcollision() {
+
+        var rect1 = {x: 5, y: 5, width: 50, height: 50}  // turn this into player and enemy co-ordinates.
+        var rect2 = {x: 20, y: 10, width: 10, height: 10}
+
+        if (rect1.x < rect2.x + rect2.width &&
+            rect1.x + rect1.width > rect2.x &&
+            rect1.y < rect2.y + rect2.height &&
+            rect1.height + rect1.y > rect2.y) {
+
+            return true;
+        }
+    }
+
+    
 
     /* This function initially draws the "game level", it will then call
      * the renderEntities function. Remember, this function is called every
