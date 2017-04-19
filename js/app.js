@@ -3,10 +3,12 @@
 // Enemies our player must avoid
 var Enemy = function(x,y, speed) {
     // Applied to each of enemy instances 
-    this.sprite = 'images/enemy-bug.png';
-    this.x = x;
-    this.y = y;
-    this.speed = speed;
+    this.sprite  = 'images/enemy-bug.png';
+    this.x       = x;
+    this.y       = y;
+    this.width   = this.sprite.width;
+    this.height  = this.sprite.height;
+    this.speed   = speed;
 };
 
 // Enemy collision detection with player
@@ -15,16 +17,15 @@ var Enemy = function(x,y, speed) {
 // (2) http://jsfiddle.net/knam8/
 Enemy.prototype.checkCollision = function() {
 
-    // does the method log a string to the console? is it unvoked?
-    // Player whose goal is to reach the water and avoid enemies.
-    //console.log("checkCollsion method invoked");
-    if ( this.x < player.x + player.width &&
-         this.x + player.width > player.x &&
-         this.y < player.y + player.height &&
+
+    if ( this.x               < player.x + player.width &&
+         this.x + this.width  > player.x &&
+         this.y               < player.y + player.height &&
          this.height + this.y > player.y) {
     
-            console.log("Collision Detected.")
-            return true;
+            console.log("Collision Detected.");
+            // TODO: How to reset game upon collision
+            //reset_game();
     }
     //console.log(this);
 }
@@ -49,13 +50,24 @@ Enemy.prototype.render = function() {
 
 
 var Player = function(x,y) {
+
     this.sprite = 'images/char-boy.png';   
-    this.x = x;
-    this.y = y;
+    this.x      = x;
+    this.y      = y;
+    this.height = 83;
+    this.width  = 101;
+
+    this.win = 0;
 };
 
 Player.prototype.update = function(dt) {
    
+};
+
+// TODO: Reset player?
+Player.prototype.reset = function() {
+   this.x = 200;
+   this.y = 400;
 };
 
 
@@ -81,6 +93,9 @@ Player.prototype.handleInput = function(move) {
     if (this.y == 10) {
         this.win = 1;
         alert("Congratulations - you reached the water and won this round!")
+        // TODO: 
+        // reset_game(); // Call from engine reset() ?  
+        // Update score?
     }    
 
 };
