@@ -9,14 +9,37 @@ var Enemy = function(x,y, speed) {
     this.speed = speed;
 };
 
-// Update the enemy's position
+// Enemy collision detection with player
+// References for collision logic and code:
+// (1) https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+// (2) http://jsfiddle.net/knam8/
+Enemy.prototype.checkCollision = function() {
+
+    // does the method log a string to the console? is it unvoked?
+    // Player whose goal is to reach the water and avoid enemies.
+    //console.log("checkCollsion method invoked");
+    if ( this.x < player.x + player.width &&
+         this.x + player.width > player.x &&
+         this.y < player.y + player.height &&
+         this.height + this.y > player.y) {
+    
+            console.log("Collision Detected.")
+            return true;
+    }
+    //console.log(this);
+}
+
+// Update the enemy's position and check collision
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
+
     // Multiply any movement by the dt parameter
     // to ensure the game runs at the same speed for all computers.
     this.x += this.speed * dt
     if (this.x > ctx.canvas.width)
         this.x = 0;
+
+    this.checkCollision();
 };
 
 // Draw the enemy on the screen
@@ -24,14 +47,11 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Player whose goal is to reach the water and avoid enemies.
+
 var Player = function(x,y) {
     this.sprite = 'images/char-boy.png';   
     this.x = x;
     this.y = y;
-
-    this.win = 0;
-    this.lose = 0;
 };
 
 Player.prototype.update = function(dt) {
