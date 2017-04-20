@@ -17,17 +17,16 @@ var Enemy = function(x,y, speed) {
 // (2) http://jsfiddle.net/knam8/
 Enemy.prototype.checkCollision = function() {
 
-
-    if ( this.x               < player.x + player.width &&
-         this.x + this.width  > player.x &&
-         this.y               < player.y + player.height &&
-         this.height + this.y > player.y) {
+    if ( this.x                < player.x + player.width &&
+         this.x + this.width   > player.x &&
+         this.y                < player.y + player.height &&
+         this.height + this.y  > player.y) {
     
-            console.log("Collision Detected.");
-            // TODO: How to reset game upon collision
-            //reset_game();
+            console.log("Enemy Collision Detected.");
+            player.reset();
+            player.score = player.score - 1;
+    
     }
-    //console.log(this);
 }
 
 // Update the enemy's position and check collision
@@ -57,14 +56,35 @@ var Player = function(x,y) {
     this.height = 83;
     this.width  = 101;
 
-    this.win = 0;
+    this.score = 0;
+    this.win   = 0;
 };
+
+// Player collision detection with Enemy (all the instances of enemies)
+// References for collision logic and code:
+// (1) https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+// (2) http://jsfiddle.net/knam8/
+Player.prototype.checkCollision = function() {
+
+    for (i = 0; i < allEnemies.length; i++) {
+        enemy = allEnemies[i];
+        if (this.x                < enemy.x + enemy.width &&
+            this.x + this.width   > enemy.x &&
+            this.y                < enemy.y + enemy.height &&
+            this.height + this.y  > enemy.y) {
+    
+            console.log("Player Collision Detected.");
+            this.reset();            
+        }
+    }
+}
 
 Player.prototype.update = function(dt) {
    
+   this.checkCollision(); 
 };
 
-// TODO: Reset player?
+// Reset player to initial location
 Player.prototype.reset = function() {
    this.x = 200;
    this.y = 400;
@@ -91,17 +111,13 @@ Player.prototype.handleInput = function(move) {
         this.y += inc;
 
     if (this.y == 10) {
-        this.win = 1;
-        alert("Congratulations - you reached the water and won this round!")
-        // TODO: 
-        // reset_game(); // Call from engine reset() ?  
-        // Update score?
+        this.score += 1;
+        alert("Congratulations - you reached the water!")
+        this.reset();
     }    
 
 };
 
-
-// TODO:  How to put this in a function ?? OOP??
 
 // Instantiating Enemies Objects (by looking at console this co-ordinates were determined)
 var enemy1  = new Enemy(0,60,  100*Math.random());
