@@ -1,7 +1,9 @@
+## Frogger - Arcade Game
+
 
 ## How to Play:
-To Win the game, player must reach the water 10 times.  Everytime collide by enemy bug, player will automatically reach to the home position.
-User may choose difficulty level 1 or 2.  Level 1 will have only one lane of enemy bugs, Level 2 will have more than one enemy bugs per lane.
+To Win the game, player must reach the water 5 times.  Everytime collide by enemy bug, player will automatically reach to the home position.
+There is no time limit, user can keep trying to reach the water.  After winning the game (after 5 times reaching to water), press enter to re-play the game.
 
 frontend-nanodegree-arcade-game
 ===============================
