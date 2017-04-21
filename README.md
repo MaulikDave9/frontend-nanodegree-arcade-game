@@ -2,12 +2,11 @@
 
 
 ## How to Play:
-To Win the game, player must reach the water 5 times.  Everytime collide by enemy bug, player will automatically reach to the home position.
-There is no time limit, user can keep trying to reach the water.  After winning the game (after 5 times reaching to water), press enter to re-play the game.
+To Win the game, player must reach the water (not having more than 5 collisions with enemies).  
+Everytime hit by an enemy bug, player will automatically reach to the home (starting) position.
+There is no time limit, user can keep trying to reach the water but can have at most 5 collisions in one game.  
+After winning or losing the game, refresh the page to re-play the game.
 
-frontend-nanodegree-arcade-game
-===============================
-
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
-
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+## How to Move Player:
+Using Arrow Keys from the keyboard (up, down, left, right). Movement will be allowed only on the game board.
+Enemy bugs will keep coming at different speeds.

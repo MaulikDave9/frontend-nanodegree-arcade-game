@@ -12,10 +12,10 @@ var Enemy = function(x,y, speed) {
     var posY = [60, 145, 230, 60, 145, 230];
 
     this.sprite  = 'images/enemy-bug.png';
-    this.x       = posX;
-    this.y       = posY[getRandomInt(0, posY.length)];
     this.width   = 50; // 101; 
     this.height  = 50; //  171;
+    this.x       = posX;
+    this.y       = posY[getRandomInt(0, posY.length)];
     this.speed   = getRandomInt(50, 100)*Math.random();
 };
 
@@ -78,15 +78,29 @@ Player.prototype.reset = function() {
 
 // Draw the player on the screen and print the winning message.
 Player.prototype.render = function() {
+    
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     
-    ctx.font = '14pt Calibri';
+    /// Display Collisions
+    ctx.font = '12pt Calibri';
     ctx.fillStyle = 'red';
-    ctx.fillText('Collisions: ' + this.collisions, 10, 30);
+    ctx.fillText('Collisions: ' + this.collisions + '(Maximum 5 Collisions before reaching water to win the game)', 10, 605);
 
 
+    ctx.font = '18pt Calibri';
+    
+    // Maximum 5 collisions allowed before reaching water.
+    if (this.collisions >= 5) {
+        ctx.fillStyle = 'red';
+        ctx.fillText('Sorry, you lost the game, too many collisions!', 10, 30);
+        this.reset();
+        //TODO: How to stop Enemy movements:
+    }
+    
+    // Reach the water and won the game.
     if (this.score === 1) {
-        ctx.fillText('Congratulations you won the game!', 200, 30);
+        ctx.fillStyle = 'green';
+        ctx.fillText('Congratulations you won the game!', 10, 30);
         this.reset();
         //TODO: How to stop Enemy movements:
     }
@@ -118,9 +132,15 @@ var player = new Player();
 
 // Instantiating Enemies Objects and put in an array allEnemies.
 var allEnemies = [];
-for (var i=0; i<5; i++) {    
+for (var i=0; i<6; i++) {    
     allEnemies.push(new Enemy());
 }
+
+// Function to display player's score
+var displayCollisions = function(n) {
+    
+   
+};
 
 // This listens for key presses and sends the keys to Player.handleInput() method. 
 document.addEventListener('keyup', function(e) {
