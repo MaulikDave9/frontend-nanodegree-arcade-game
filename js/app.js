@@ -1,8 +1,11 @@
+'use strict';
+
+
 /* global variable: stopEnemy to stop the enemy movement upon end of the game.
  * global variable numEnemies can be changed for making game harder or easier.
 */
 var stopEnemy = 1; 
-var numEnemies = 6
+var numEnemies = 6;
 
 /* Returns random integer from given range!
 */
@@ -45,7 +48,7 @@ Enemy.prototype.checkCollision = function() {
         player.collisions += 1;
         player.reset();
     }
-}
+};
 
 /* Update the enemy's position and check collision
  * Parameter: dt, a time delta between ticks
@@ -103,7 +106,8 @@ Player.prototype.render = function() {
 
     ctx.font = '12pt Calibri';
     ctx.fillStyle = 'red';
-    ctx.fillText('Collisions: ' + this.collisions + '(Maximum 5 Collisions before reaching water to win the game)', 10, 605);
+    ctx.clearRect(0, 590, 505, 606)
+    ctx.fillText('Collisions: ' + this.collisions + ' (Maximum 5 Collisions before reaching water to win the game)', 10, 605);
 
 
     ctx.font = '18pt Calibri';
