@@ -1,5 +1,15 @@
 ## Frogger - Arcade Game
 
+## Link to GitHub Repository: 
+https://github.com/MaulikDave9/frontend-nanodegree-arcade-game
+
+## Installation (one of the way to run the game on your local machine):
+
+(1) Clone the repository onto your local workstation:  
+	>> git clone https://github.com/MaulikDave9/frontend-nanodegree-arcade-game.git
+
+(2) Please click on the index.html file, and make sure it opens in your browser window, which will let you play the game.
+
 
 ## How to Play:
 Player can be moved using up, down, left and right keys from the keyboard . Movement will be allowed only on the game board.

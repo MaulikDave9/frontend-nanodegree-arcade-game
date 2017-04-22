@@ -15,10 +15,24 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
+/*
+ * Character of the game - player or enemy will inherit this class. 
+ */
+var Character = function(img, width, height, posX, posY,speed) {
+
+    this.sprite = img;
+    this.width  = width;  
+    this.height = height; 
+    this.x      = posX;
+    this.y      = posY;
+    this.speed  = speed;
+
+};
+
 /* Enemies the player must avoid
  * Randomly generate 6 enemies on three rows of stones 
 */
-var Enemy = function(x, y, speed) {
+var Enemy = function() {
 
     var posX = 0;
     var posY = [60, 145, 230, 60, 145, 230];
