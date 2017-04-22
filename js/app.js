@@ -1,10 +1,9 @@
 'use strict';
 
-
 /* global variable: stopEnemy to stop the enemy movement upon end of the game.
  * global variable numEnemies can be changed for making game harder or easier.
 */
-var stopEnemy = 1; 
+var stopEnemy = 1;
 var numEnemies = 6;
 
 /* Returns random integer from given range!
@@ -15,23 +14,9 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-/*
- * Character of the game - player or enemy will inherit this class. 
- */
-var Character = function(img, width, height, posX, posY,speed) {
-
-    this.sprite = img;
-    this.width  = width;  
-    this.height = height; 
-    this.x      = posX;
-    this.y      = posY;
-    this.speed  = speed;
-
-};
-
 /* Enemies the player must avoid
- * Randomly generate 6 enemies on three rows of stones 
-*/
+ * Randomly generate 6 enemies on three rows of stones
+ */
 var Enemy = function() {
 
     var posX = 0;
@@ -58,7 +43,6 @@ Enemy.prototype.checkCollision = function() {
         this.y < player.y + player.height &&
         this.height + this.y > player.y) {
 
-        //console.log("Enemy Collision Detected.");    
         player.collisions += 1;
         player.reset();
     }
@@ -71,10 +55,10 @@ Enemy.prototype.checkCollision = function() {
  */
 Enemy.prototype.update = function(dt) {
 
-
     this.x += this.speed * dt * stopEnemy;
-    if (this.x > ctx.canvas.width)
+    if (this.x > ctx.canvas.width) {
         this.x = 0;
+    }
 
     this.checkCollision();
 };
@@ -92,8 +76,8 @@ var Player = function() {
     this.sprite = 'images/char-boy.png';
     this.x = 200;
     this.y = 400;
-    this.width = 50; 
-    this.height = 50; 
+    this.width = 50;
+    this.height = 50;
 
     this.collisions = 0;
     this.score = 0;
@@ -110,7 +94,7 @@ Player.prototype.reset = function() {
 
 
 /* Draw the player on the screen and print the winning message.
- * Display number of collisions 
+ * Display number of collisions
  * Lose game if >= 5 collisions before reaching water
  * Win the game if reach the water with less than 5 collisions.
  */
@@ -175,7 +159,7 @@ for (var i = 0; i < numEnemies; i++) {
 }
 
 
-/* This listens for key presses and sends the keys to Player.handleInput() method. 
+/* This listens for key presses and sends the keys to Player.handleInput() method.
  */
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
